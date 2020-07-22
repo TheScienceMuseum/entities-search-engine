@@ -6,6 +6,7 @@ bulkPost = require './bulk_post_to_elasticsearch'
 wdk = require 'wikidata-sdk'
 # omitting type, sitelinks
 props = [ 'labels', 'aliases', 'descriptions', 'claims' ]
+languages = [ 'en' ]
 formatEntity = require './format_entity'
 addEntitiesImages = require './add_entities_images'
 whitelist = CONFIG.types
@@ -44,7 +45,7 @@ PutNextBatch = (type, urls)->
     got.get url, { json: true }
     .then removeMissingEntities
     .then addImages(type)
-    .then formatEntities
+    #.then formatEntities
     .then bulkPost.bind(null, type)
     # Will call itself until there is no more urls to fetch
     .then putNextBatch
