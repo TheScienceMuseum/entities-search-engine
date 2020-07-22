@@ -28,7 +28,7 @@ module.exports = (type, ids)->
   if typeof ids is 'string' then ids = ids.split '|'
 
   # generate urls for batches of 50 entities
-  urls = wdk.getManyEntities { ids, props }
+  urls = wdk.getManyEntities { ids, props, languages }
 
   return PutNextBatch(type, urls)()
 
